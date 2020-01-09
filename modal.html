@@ -23,7 +23,7 @@
 
         <div class="container txtout">
                 <div class="row">
-                    <div class="col-sm-6 tabla">      
+                    <div class="col-sm-8  tabla">      
                         <input type="checkbox" data-toggle="toggle" id="cryp" 
                                 data-off="Encrypt" data-on="Decrypt" 
                                 data-onstyle="success" data-offstyle="info" data-width="100%">                  
@@ -32,30 +32,14 @@
                         <div w3-include-html="modals/decrypt.html"></div>
                         <script>includeHeader();</script>  
                     </div>
-                <div class="col-sm-6 tabla">                        
+                <div class="col-sm-4 tabla">                        
                     <div class="container txtout">
                             <div class="row">
-                                <div class="col-sm-6 tabla">
+                                <div class="col-sm-12 tabla">
                                     <div class="table-responsive table-bordered table-hover table-condensed table-striped">
-                                        <table class="table" id="inTable">
-                                            <p class="text-center">Input </p>
-                                            <th>Name</th><th>Value</th>
-                                            <tr><td>thhhhd</td><td>26634840</td></tr>
-                                            <tr><td>thhhhd</td><td>26634840</td></tr>
-                                            <tr><td>thhhhd</td><td>26634840</td></tr>
-                                            <tr><td>thhhhd</td><td>26634840</td></tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 tabla">
-                                    <div class="table-responsive table-bordered table-hover table-condensed table-striped">
-                                        <table class="table" id="exTable">
+                                        <table class="table" id='restable' style="display: none;">
                                             <p class="text-center">Output</p>
                                             <th>Name</th><th>Value</th>
-                                            <tr><td>thhhhd</td><td>26634840</td></tr>
-                                            <tr><td>thhhhd</td><td>26634840</td></tr>
-                                            <tr><td>thhhhd</td><td>26634840</td></tr>
-                                            <tr><td>thhhhd</td><td>26634840</td></tr>
                                         </table>
                                     </div>
                                 </div>
@@ -96,14 +80,13 @@
                             var decfile = $("#file")[0].files[0];
                             var mtext = onFileUpload();
                             logc('this.id', this.id, 'magenta');
-
                             onFileUpload(this)              
                             logc('$(decfile)', decfile, 'magenta');
                             logc('text', mtext, 'cyan');              
                         });
                     }
                     $('#dcrypt').click(function(){
-                            console.log('decrypt button pressed : ')
+                        console.log('decrypt button pressed : ')
                         var decryptedArr = [];
                         var site = $("#dwebsite").val();
                         var encdstr = $("#encstr").val();
@@ -122,8 +105,23 @@
                         });
                 })
                 
-                
-                        
+                displayResults = (resArray) => {
+                    resArray.forEach(element => {
+                        logc('Laying table', element, "pink");
+                        // var tab = ${'restable'}
+                        var tab = document.getElementById('restable')
+                        var row = document.createElement('tr')
+                        var dt1 = document.createElement('td')
+                        var dt2 = document.createElement('td')
+                        logc('valwu ', element.value, "pink");
+                        dt1.innerHTML = element.key
+                        dt2.innerHTML = element.value
+                        row.appendChild(dt1)
+                        row.appendChild(dt2)
+                        tab.appendChild(row)
+                        tab.style = 'display: block;';
+                    });
+                }
                 createInObj = (key, val) => {
                     var obj     = {};
                     obj.key     = key;
@@ -171,29 +169,6 @@
                 });
                 //decryption test 
             });
-                  //handle decription: file upload, string, drag and drop
-            
-            // //handle decription: file upload, string, drag and drop
-            // initDecryptor = () => {
-            //         var decryptedArr = [];
-            //         var site = $("#dwebsite").val();
-            //         var encdstr = $("#encstr").val();
-            //         // var encryptedObj = {};
-            //         // var encryptedObj = JSON.parse('{ "0":"U2FsdGVkX1+6jjo6YrK3IVvzT8eWPui1TBUPXM5wZvtHIh2R65jkX0UHzeoywpFUGl0AXf8oqA4Z10FnPUShnQYJqF4jP3XAGFtbqBTWTks6mkbxHACxAlbDDk9KzGVaICNEsD7BOZXpOQb4ARbNYVxuAqOaP7V2up/+oCNsD4Lq1XRwzhpcdTilyMm4WTrDvicSPn9ERFobElaPUlcOERgiBUJ30emYTHhBj2rL9KPVF/6S1iK2ZX5UCXVg80tvaWHL4/fhxBxjKQ9j6pD4Oz45ENk6ypMPBoCW6SXDAWqLS6muLC44smOxSOcguU34QqsDrK84dzJogDQzz5gzScM6pQvKidfoplACvE7S4Hx6IUN/87fdcIefc0RkZIKzrGhC6TS+HsN0Lj+F0LZyHjia8rVR9RhRggwnJN+7NbuE2oKQqK/OkrpDzNTEj2w4g6rCc8TgxtNtPxsQTxa7JE951mUYacYU2A4x6x8o2HroyX8E6Y48fhu4At/xlDhJ6hqMX7Nyj3MQoVoMRnYcdGCXfai+yPlWfFvWzswApOqwRRsTLqYeYyWjslyXh/hMOrQRskhKTfR4Nyf7S5JULcE2B4iQ1f9emWqjshsjkMYk/YmuguwcpeCZDVos+4De7fc2DRdiHNeZLQhTR2Cb+rq8VP+sw7R3T5pqYUT9pMLCYxH2NTp4SeQnM+lyAz25/GoLuyw+Tu7hkQtss1awAA=="}');            
-            //         var key = $("#dkey").val();
-            //         var len = $("#dlen").val();      //PUK-53229651 -> 0708 407388  //4912
-            //         if (key.length > 0 && len !== NaN){
-            //             let obj2 = new CryptLibyPaz(key, len);
-            //             // if (site.length > 0) //
-            //             decryptedArr = obj2.decryptThis(encdstr);
-            //             // console.log('decryptedArr : ' + decryptedArr);
-            //             log('Modal.html decryptedArr', decryptedArr, "brown");
-            //             console.dir(decryptedArr);           
-
-            //         }
-            //         // console.log('encryptedObj : ' + encryptedObj.toString());
-            // }
-
                 
             loge = function(name, value) {
                 // console.log('%cI %cam %cblack','color:red;','color:blue;', 'color: green;');

@@ -81,8 +81,6 @@ function CryptLibyPaz(key, length) {
         // console.log('decryptedArr : ' + decryptedArr);
         log('Modal.html decryptedArr', decryptedArr, "pink");
         console.dir(decryptedArr);           
-        log('decryptedArr', decryptedArr, 'beige')
-
     }
     // console.log('encryptedObj : ' + encryptedObj.toString());
 }
@@ -103,6 +101,8 @@ function CryptLibyPaz(key, length) {
         });
         log('keyValArray', keyValArray, 'cyan')
         console.dir(keyValArray)
+        log('decryptedArr before dis[;ay', keyValArray, 'beige')
+        displayResults(keyValArray)
         return keyValArray
     }
     // this.decryptThis = (object) => {
