@@ -1,0 +1,172 @@
+html, body {
+    min-height: 100%;
+}
+
+body, div, form, input, select, p {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 16px;
+    color: #eee;
+}
+
+body {
+/* background-image: url('../CryptWorks/load/img/55804.jpg'); */
+/* background-image: url('http://localhost/cryptworks/load/img/55804.jpg'); */
+background-image: url('../img/19.jpg'); 
+/* background-image: url('../img/1.webp'); 
+background-image: url('../img/45.gif');  */
+/* background-color: #85d6de; */
+background-position: center; 
+background-attachment: fixed;
+height: 100%;
+}
+.tabla {
+    margin-top: 25px;
+}
+.txtout {
+    margin: 20px 10px 20px 10px;
+    border: 2px solid;
+    height: max-content;
+    background-color: #26a9e0;
+}
+h1, h2 {
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+h2 {
+    margin: 0 0 0 8px;
+}
+
+.main-block, mt-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.5);
+}
+.left-part {
+    padding: 0;
+}
+form {
+    padding: 15px;
+}
+
+.left-part {
+    text-align: center;
+}
+
+.fa-graduation-cap {
+    font-size: 72px;
+}
+
+.modal-body, form {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+input,select {
+    padding: 5px;
+    margin-bottom: 5px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+
+input::placeholder {
+    color: #777;
+}
+
+textarea::placeholder {
+    color: #28a745;
+}
+
+option:focus {
+    border: none;
+}
+
+option {
+    background: black;
+    border: none;
+}
+
+.checkbox input {
+    margin: 0 10px 0 0;
+    vertical-align: middle;
+}
+
+.checkbox a {
+    color: #26a9e0;
+}
+
+.checkbox a:hover {
+    color: #85d6de;
+}
+
+.btn-item,button {
+    padding: 10px 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    /* background: #bac8ce; */
+    background: #eee;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    /* color: #fff; */
+    color: #000;
+}
+.btn-1 {
+    display: inline-block;
+    margin: 20px 25px 0;
+    width: 150px;
+}
+.btn-item {
+    display: inline-block;
+    margin: 20px 5px 0;
+}
+
+button, textarea, .hor {
+    width: 100%;
+}
+
+button:hover,.btn-item:hover {
+    background: #85d6de;
+}
+
+@media (min-width: 568px) {
+    html, body {
+        height: 100%;
+    }
+    .main-block {
+        flex-direction: row;
+        height: calc(100% - 50px);
+    }
+    .left-part, form {
+        flex: 1;
+        height: auto;
+    }
+}
+
+
+    /* background: url("/uploads/media/default/0001/01/b5edc1bad4dc8c20291c8394527cb2c5b43ee13c.jpeg") no-repeat center; */
+    /* background-image: url("55804.jpg"); */
+    /* background-image: url("../55804.jpg"); */
+    /* background-image: url('http://www.birds.com/wp-content/uploads/home/bird4.jpg'); */
+    /* background-color: #ccc; */
+    /* background-size: cover; */
+    /* background-color: #FFF; */
