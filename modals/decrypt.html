@@ -1,0 +1,32 @@
+<div class="modal-body" id="decModal" style="margin-bottom: 20px; display: none; " style="margin-bottom: 20px;">
+    <div class="title">
+        <h6 id="title">Decrypt data</h6>
+    </div>
+    <form>
+        <div class="info">
+            <div class='hor'>
+                <input type="text" id="dkey" name="name" placeholder="Key" required>
+                <input type="text" id="dlen" name="name" placeholder="Length" required>
+            </div>
+
+            <div class='hor'>
+                <input class="site" id="dwebsite" type="text" name="name" placeholder="Website">
+                <button type="button" id="search" href="/" hidden>Search</button>
+            </div>
+        </div>
+
+        <div class="container" style="border: 1px solid; color: #28a745;">
+            <div class="upload-area" id="uploadfile" style="color: dimgray;">
+                <!-- <h6>Enter string</h6> -->
+                <!-- <input type="text" id="encstr" placeholder="Enter Encrypted string here..."> -->
+                <input type="file" name="file" id="file" style="color: #28a745;">
+                <!-- Drag and Drop container-->
+                <h6 style="color: #28a745;">OR Drag and Drop file here...</h6>
+                <textarea name="describe" id="encstr" placeholder="OR Enter Encrypted string here..."></textarea>
+            </div>
+        </div>
+        <div class='hor'>
+            <button class="btn btn-outline-info" type="button" id="dcrypt" href="/">Decrypt & Show</button>
+        </div>
+    </form>
+</div>
