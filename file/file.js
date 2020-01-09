@@ -1,95 +1,62 @@
-$(function() {
-    // preventing page from redirecting
-    $("html").on("dragover", function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $("h1").text("Drag here");
-    });
+function onFileUpload(outputNode) {
+    this.outputNode = outputNode
+	// get DOM element
+	let fileInputJqueryObject =$('#file');
+	let fileInputDOMElement = fileInputJqueryObject[0];
+	
+	// get filename
+	let filePath = fileInputDOMElement.value;
+	let fileName = filePath.replace(/^.*(\\|\/|\:)/, '');
+	
+	// get file reference
+	let mfile = fileInputDOMElement.files[0];
+	
+	// read file content
+	let fileReader = new FileReader();
+        fileReader.readAsText(mfile, 'UTF-8');
+    var fileStr = '*';
+	fileReader.onerror = onFileReadError;
+	fileReader.onload = function(event) {
+        // onFileReadSuccess(event, fileName);
+        fileStr = event.target.result
+        console.log("reading file success outputNode: "+outputNode);
+        console.dir(this);
+        // let obj3 = new CryptLibyPaz(key, len);
+        // obj3.initDecryptor() 
+        // this.outputNode.text = fileStr;
+        // $(outputNode).text(fileStr)
+        $('#encstr').text(fileStr)
+            // console.log('outputNode id : ' + outputNode.id);
+        // var decryptedArr = [];
+        // var site = $("#dwebsite").val();
+        // // var encdstr = $("#encstr").val();
+        // var key = $("#dkey").val();
+        // var len = $("#dlen").val();      //PUK-53229651 -> 0708 407388  //4912
+        // if (key.length > 0 && len !== NaN){
+        //     let obj2 = new CryptLibyPaz(key, len);
+        //     // if (site.length > 0) //
+        //     decryptedArr = obj2.decryptThis(fileStr);
+        //     // console.log('decryptedArr : ' + decryptedArr);
+        //     log('Modal.html decryptedArr', decryptedArr, "brown");
+        //     console.dir(decryptedArr);                
 
-    $("html").on("drop", function(e) { e.preventDefault();
-        e.stopPropagation(); });
+        // }
 
-    // Drag enter
-    $('.upload-area').on('dragenter', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        $("h6").text("Drop");
-    });
 
-    // Drag over
-    $('.upload-area').on('dragover', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        $("h6").text("Drop");
-    });
-
-    // Drop
-    $('.upload-area').on('drop', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-
-        $("h6").text("Upload");
-
-        var file = e.originalEvent.dataTransfer.files;
-        var fd = new FormData();
-        fd.append('file', file[0]);
-
-        // uploadData(fd);
-    });
-
-    // Open file selector on div click
-    $("#uploadfile").click(function() {
-        $("#file").click();
-    });
-
-    // file selected
-    $("#file").change(function() {
-        var fd = new FormData();
-        var files = $('#file')[0].files[0];
-        fd.append('file',files);
-        // uploadData(fd);
-    });
-});
-
-// Sending AJAX request and upload file
-// function uploadData(formdata){
-
-// $.ajax({
-//     url: 'upload.php',
-//     type: 'post',
-//     data: formdata,
-//     contentType: false,
-//     processData: false,
-//     dataType: 'json',
-//     success: function(response){
-//         addThumbnail(response);
-//     }
-// });
-// }
-
-// Added thumbnail
-function addThumbnail(data) {
-    $("#uploadfile h1").remove();
-    var len = $("#uploadfile div.thumbnail").length;
-
-    var num = Number(len);
-    num = num + 1;
-
-    var name = data.name;
-    var size = convertSize(data.size);
-    var src = data.src;
-
-    // Creating an thumbnail
-    $("#uploadfile").append('<div id="thumbnail_' + num + '" class="thumbnail"></div>');
-    $("#thumbnail_" + num).append('<img src="' + src + '" width="100%" height="78%">');
-    $("#thumbnail_" + num).append('<span class="size">' + size + '<span>');
-
+    };	
+    // return fileStr;	
 }
 
-// Bytes conversion
-function convertSize(size) {
-    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    if (size == 0) return '0 Byte';
-    var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)));
-    return Math.round(size / Math.pow(1024, i), 2) + ' ' + sizes[i];
+function onFileReadError() {
+	alert("Error reading file.");
 }
+
+// function onFileReadSuccess(event, fileName) {
+// 	let fileContent = event.target.result;
+	
+// 	$.post("/your_server_address", 
+// 		{ fileName: fileName, fileContent: fileContent }
+// 		).done(function(serverResponse) {
+// 			// handle server response
+// 		});
+// }    

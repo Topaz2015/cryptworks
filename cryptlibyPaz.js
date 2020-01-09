@@ -71,6 +71,21 @@ function CryptLibyPaz(key, length) {
         // this.decryptThis(myEncdStr)
         return myEncdStr;
     }
+    
+  //handle decription: file upload, string, drag and drop
+  this.initDecryptor = () => {    //PUK-53229651->0708/407388  //4912
+    var decryptedArr = []
+    if (this.length > 0 && this.len !== NaN){
+        // if (site.length > 0) //
+        decryptedArr = this.decryptThis(encdstr);
+        // console.log('decryptedArr : ' + decryptedArr);
+        log('Modal.html decryptedArr', decryptedArr, "pink");
+        console.dir(decryptedArr);           
+        log('decryptedArr', decryptedArr, 'beige')
+
+    }
+    // console.log('encryptedObj : ' + encryptedObj.toString());
+}
     this.decryptThis = (myEncdStr) => {
         this.encryptedObj = myEncdStr;
         var keyValArray = [];
@@ -86,6 +101,8 @@ function CryptLibyPaz(key, length) {
             keyValArray.push(dencdObj)
             console.dir(dencdObj)
         });
+        log('keyValArray', keyValArray, 'cyan')
+        console.dir(keyValArray)
         return keyValArray
     }
     // this.decryptThis = (object) => {

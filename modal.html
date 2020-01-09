@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" rel="stylesheet" href="css/bootstrap441.min.css" />
     <link type="text/css" rel="stylesheet" href="css/form.css" />
-    <link rel="stylesheet" href="/file/file.css"/>
+    <!-- <link rel="stylesheet" href="file/file.css"/> -->
     <link rel="stylesheet" href="toggle/bootstrap-toggle.min.css"/>
     <script type='text/javascript' src="modals/include.js"></script>
     <script type='text/javascript' src="js/crypto-js.min.js"></script>
@@ -17,9 +17,9 @@
 </head>
 <body)>
     <div class="container mt-3">
-        <div class="container" >
+        <!-- <div class="container" >
             <input type="file" name="file" id="file">        
-        </div>
+        </div> -->
 
         <div class="container txtout">
                 <div class="row">
@@ -87,13 +87,43 @@
                     } else {                                    //decryption
                         enc.style.display = "none";
                         dec.style.display = "block";
-                        $("#encstr").text('U2FsdGVkX1+k+4w5bc6KDRrd05uw7CmX0bigKP846HDwKgpTg7Hmyii1t5JEIGHatf98k3vtTkeV0m+lkFNwyA0a9m5sqk5vqNv/xcqbnb2jjafRYLi6uR3NgA0N6p1MrAxIRPejCHa3Ez4RzBWU2c6xNnCs1q2dNZYwGA4rzDa+Ox+1EVC6uQhGDEMkKmuWegkOECBU3creyEtaBY1PBh/1lBad4I2YHldSmNWGtwGAI1DHG1+SMWrSEiQem6VP+MJ3zMMknibzZelbW3QO0/KTgaY6f3iTNU4xO93JvsS0/0ybwhZZfopPOwV+QctjIOoA1moObKbMNiXEJqHskHY2nOcAgZoI5j3Q4urWh3DYewlARsP9gLlFXjQ8hE/XqBJVm1jGS+TR4Xu4KivP0KG+Y677EWe+3JkX1RqpdXt+n7+HTTOmJbe1lFXVlq1nSukhzxwYe/2eK1C+HsNkjRTVsDmoFcAHmAIfQ4l3E84U7+i1sb93mbUdRuaXVPb2i7W9GNLFriIPyeSVhcftmwqcQEu1g2NAuXOkOpDRuQFwnryO2APkCVQvOG/H4mm1AgnKqz5xjJWFS2wp+nHQ/IpbLFYQQO6C4F6PLymOjg2vHs9qKD1Q8VYRG95yfHt88D9WFvnKsRcREF27sHgw6tOwjXdT09cGmyrtFul/6yLTvmpIUgkFTnoz27EE7HGG1EJzYn2XSaLKXPmnelN78sMDs0FvG6LeKQqJellefLbUbJzbTm7fHA5HPGIHYxQs3UECz35hCgZ30sOfzoLCGuDnBvNLIf3Wo9hx1giOSfs=');          //.attr('readonly', 'readonly');
+                        // $("#encstr").text('U2FsdGVkX1+k+4w5bc6KDRrd05uw7CmX0bigKP846HDwKgpTg7Hmyii1t5JEIGHatf98k3vtTkeV0m+lkFNwyA0a9m5sqk5vqNv/xcqbnb2jjafRYLi6uR3NgA0N6p1MrAxIRPejCHa3Ez4RzBWU2c6xNnCs1q2dNZYwGA4rzDa+Ox+1EVC6uQhGDEMkKmuWegkOECBU3creyEtaBY1PBh/1lBad4I2YHldSmNWGtwGAI1DHG1+SMWrSEiQem6VP+MJ3zMMknibzZelbW3QO0/KTgaY6f3iTNU4xO93JvsS0/0ybwhZZfopPOwV+QctjIOoA1moObKbMNiXEJqHskHY2nOcAgZoI5j3Q4urWh3DYewlARsP9gLlFXjQ8hE/XqBJVm1jGS+TR4Xu4KivP0KG+Y677EWe+3JkX1RqpdXt+n7+HTTOmJbe1lFXVlq1nSukhzxwYe/2eK1C+HsNkjRTVsDmoFcAHmAIfQ4l3E84U7+i1sb93mbUdRuaXVPb2i7W9GNLFriIPyeSVhcftmwqcQEu1g2NAuXOkOpDRuQFwnryO2APkCVQvOG/H4mm1AgnKqz5xjJWFS2wp+nHQ/IpbLFYQQO6C4F6PLymOjg2vHs9qKD1Q8VYRG95yfHt88D9WFvnKsRcREF27sHgw6tOwjXdT09cGmyrtFul/6yLTvmpIUgkFTnoz27EE7HGG1EJzYn2XSaLKXPmnelN78sMDs0FvG6LeKQqJellefLbUbJzbTm7fHA5HPGIHYxQs3UECz35hCgZ30sOfzoLCGuDnBvNLIf3Wo9hx1giOSfs=');          //.attr('readonly', 'readonly');
                         $("#dkey").val('key');          //.attr('readonly', 'readonly');
                         $("#dlen").val('9');          //.attr('readonly', 'readonly');
-                        $("#dcrypt").click(initDecryptor);
+                        
+                        $('#file').change(function(){
+                            var decfile = $("#file").val();
+                            var decfile = $("#file")[0].files[0];
+                            var mtext = onFileUpload();
+                            logc('this.id', this.id, 'magenta');
+
+                            onFileUpload(this)              
+                            logc('$(decfile)', decfile, 'magenta');
+                            logc('text', mtext, 'cyan');              
+                        });
                     }
+                    $('#dcrypt').click(function(){
+                            console.log('decrypt button pressed : ')
+                        var decryptedArr = [];
+                        var site = $("#dwebsite").val();
+                        var encdstr = $("#encstr").val();
+                        var key = $("#dkey").val();
+                        var len = $("#dlen").val();      //PUK-53229651 -> 0708 407388  //4912
+                        if (key.length > 0 && len !== NaN){
+                            let obj2 = new CryptLibyPaz(key, len);
+                            // if (site.length > 0) //
+                            decryptedArr = obj2.decryptThis(encdstr);
+                            // console.log('decryptedArr : ' + decryptedArr);
+                            log('Modal.html decryptedArr', decryptedArr, "brown");
+                            console.dir(decryptedArr);   
+                        }
+                            logc('decryptedArr', decryptedArr, 'cyan');                            
+                            // logc('$(decfile)', decfile, 'magenta');
+                        });
                 })
                 
+                
+                        
                 createInObj = (key, val) => {
                     var obj     = {};
                     obj.key     = key;
@@ -124,6 +154,11 @@
                     console.log("adding you to github")
                     console.log(('%c(encryptedObj : ' + encryptedObj), 'color:#d5f');
                     console.dir(encryptedObj);
+                        var link = document.createElement('a');
+                        link.download = 'data.json';
+                        var blob = new Blob([encryptedObj], {type: 'text/plain'});
+                        link.href = window.URL.createObjectURL(blob);
+                        link.click();
                     console.log('check this out!!')
                 }
                 //decryption test
@@ -136,26 +171,30 @@
                 });
                 //decryption test 
             });
-               
-            //handle decription: file upload, string, drag and drop
-            initDecryptor = () => {
-                    var decryptedArr = [];
-                    var site = $("#dwebsite").val();
-                    var encdstr = $("#encstr").val();
-                    // var encryptedObj = {};
-                    // var encryptedObj = JSON.parse('{ "0":"U2FsdGVkX1+6jjo6YrK3IVvzT8eWPui1TBUPXM5wZvtHIh2R65jkX0UHzeoywpFUGl0AXf8oqA4Z10FnPUShnQYJqF4jP3XAGFtbqBTWTks6mkbxHACxAlbDDk9KzGVaICNEsD7BOZXpOQb4ARbNYVxuAqOaP7V2up/+oCNsD4Lq1XRwzhpcdTilyMm4WTrDvicSPn9ERFobElaPUlcOERgiBUJ30emYTHhBj2rL9KPVF/6S1iK2ZX5UCXVg80tvaWHL4/fhxBxjKQ9j6pD4Oz45ENk6ypMPBoCW6SXDAWqLS6muLC44smOxSOcguU34QqsDrK84dzJogDQzz5gzScM6pQvKidfoplACvE7S4Hx6IUN/87fdcIefc0RkZIKzrGhC6TS+HsN0Lj+F0LZyHjia8rVR9RhRggwnJN+7NbuE2oKQqK/OkrpDzNTEj2w4g6rCc8TgxtNtPxsQTxa7JE951mUYacYU2A4x6x8o2HroyX8E6Y48fhu4At/xlDhJ6hqMX7Nyj3MQoVoMRnYcdGCXfai+yPlWfFvWzswApOqwRRsTLqYeYyWjslyXh/hMOrQRskhKTfR4Nyf7S5JULcE2B4iQ1f9emWqjshsjkMYk/YmuguwcpeCZDVos+4De7fc2DRdiHNeZLQhTR2Cb+rq8VP+sw7R3T5pqYUT9pMLCYxH2NTp4SeQnM+lyAz25/GoLuyw+Tu7hkQtss1awAA=="}');            
-                    var key = $("#dkey").val();
-                    var len = $("#dlen").val();      //PUK-53229651 -> 0708 407388  //4912
-                    if (key.length > 0 && len !== NaN){
-                        let obj2 = new CryptLibyPaz(key, len);
-                        // if (site.length > 0) //
-                        decryptedArr = obj2.decryptThis(encdstr);
-                        // console.log('decryptedArr : ' + decryptedArr);
-                        log('Modal.html decryptedArr', decryptedArr, "brown");
-                        console.dir(decryptedArr);
-                    }
-                    // console.log('encryptedObj : ' + encryptedObj.toString());
-                 }
+                  //handle decription: file upload, string, drag and drop
+            
+            // //handle decription: file upload, string, drag and drop
+            // initDecryptor = () => {
+            //         var decryptedArr = [];
+            //         var site = $("#dwebsite").val();
+            //         var encdstr = $("#encstr").val();
+            //         // var encryptedObj = {};
+            //         // var encryptedObj = JSON.parse('{ "0":"U2FsdGVkX1+6jjo6YrK3IVvzT8eWPui1TBUPXM5wZvtHIh2R65jkX0UHzeoywpFUGl0AXf8oqA4Z10FnPUShnQYJqF4jP3XAGFtbqBTWTks6mkbxHACxAlbDDk9KzGVaICNEsD7BOZXpOQb4ARbNYVxuAqOaP7V2up/+oCNsD4Lq1XRwzhpcdTilyMm4WTrDvicSPn9ERFobElaPUlcOERgiBUJ30emYTHhBj2rL9KPVF/6S1iK2ZX5UCXVg80tvaWHL4/fhxBxjKQ9j6pD4Oz45ENk6ypMPBoCW6SXDAWqLS6muLC44smOxSOcguU34QqsDrK84dzJogDQzz5gzScM6pQvKidfoplACvE7S4Hx6IUN/87fdcIefc0RkZIKzrGhC6TS+HsN0Lj+F0LZyHjia8rVR9RhRggwnJN+7NbuE2oKQqK/OkrpDzNTEj2w4g6rCc8TgxtNtPxsQTxa7JE951mUYacYU2A4x6x8o2HroyX8E6Y48fhu4At/xlDhJ6hqMX7Nyj3MQoVoMRnYcdGCXfai+yPlWfFvWzswApOqwRRsTLqYeYyWjslyXh/hMOrQRskhKTfR4Nyf7S5JULcE2B4iQ1f9emWqjshsjkMYk/YmuguwcpeCZDVos+4De7fc2DRdiHNeZLQhTR2Cb+rq8VP+sw7R3T5pqYUT9pMLCYxH2NTp4SeQnM+lyAz25/GoLuyw+Tu7hkQtss1awAA=="}');            
+            //         var key = $("#dkey").val();
+            //         var len = $("#dlen").val();      //PUK-53229651 -> 0708 407388  //4912
+            //         if (key.length > 0 && len !== NaN){
+            //             let obj2 = new CryptLibyPaz(key, len);
+            //             // if (site.length > 0) //
+            //             decryptedArr = obj2.decryptThis(encdstr);
+            //             // console.log('decryptedArr : ' + decryptedArr);
+            //             log('Modal.html decryptedArr', decryptedArr, "brown");
+            //             console.dir(decryptedArr);           
+
+            //         }
+            //         // console.log('encryptedObj : ' + encryptedObj.toString());
+            // }
+
+                
             loge = function(name, value) {
                 // console.log('%cI %cam %cblack','color:red;','color:blue;', 'color: green;');
                 // console.log('%cblack','color: red;');
