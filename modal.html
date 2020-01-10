@@ -17,27 +17,23 @@
 </head>
 <body)>
     <div class="container mt-3">
-        <!-- <div class="container" >
-            <input type="file" name="file" id="file">        
-        </div> -->
-
         <div class="container txtout">
-                <div class="row">
-                    <div class="col-sm-8  tabla">      
-                        <input type="checkbox" data-toggle="toggle" id="cryp" 
-                                data-off="Encrypt" data-on="Decrypt" 
-                                data-onstyle="success" data-offstyle="info" data-width="100%">                  
-                        <!-- Modal -->
-                        <div w3-include-html="modals/encrypt.html"></div> 
-                        <div w3-include-html="modals/decrypt.html"></div>
-                        <script>includeHeader();</script>  
-                    </div>
-                <div class="col-sm-4 tabla">                        
-                    <div class="container txtout">
+            <div class="row">
+                <div class="col-sm-8  tabla">      
+                    <input type="checkbox" data-toggle="toggle" id="cryp" 
+                            data-off="Encrypt" data-on="Decrypt" 
+                            data-onstyle="success" data-offstyle="info" data-width="100%">                  
+                    <!-- Modal -->
+                    <div w3-include-html="modals/encrypt.html"></div> 
+                    <div w3-include-html="modals/decrypt.html"></div>
+                    <script>includeHeader();</script>  
+                </div>
+                <div class="col-sm-4 tabla" id='rightside' style="display: none;">                        
+                    <div class="container txtout" style="background-color: darkslategray;">
                             <div class="row">
                                 <div class="col-sm-12 tabla">
                                     <div class="table-responsive table-bordered table-hover table-condensed table-striped">
-                                        <table class="table" id='restable' style="display: none;">
+                                        <table class="table" id='restable' style=" color: aliceblue;">
                                             <p class="text-center">Output</p>
                                             <th>Name</th><th>Value</th>
                                         </table>
@@ -119,8 +115,8 @@
                         row.appendChild(dt1)
                         row.appendChild(dt2)
                         tab.appendChild(row)
-                        tab.style = 'display: block;';
                     });
+                        document.getElementById('rightside').style = 'display: block;';
                 }
                 createInObj = (key, val) => {
                     var obj     = {};
