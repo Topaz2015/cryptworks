@@ -69,7 +69,7 @@ function CryptLibyPaz(key, length) {
         var myEncdStr = this.objEncrypt(this.hashed_key, encdObject);   //string
         console.log(('typeof(myEncdStr: )' + typeof(myEncdStr)));
         // this.decryptThis(myEncdStr)
-        return myEncdStr;
+        return myEncdStr; 
     }
     
   //handle decription: file upload, string, drag and drop
@@ -94,14 +94,14 @@ function CryptLibyPaz(key, length) {
             var ivalue = this.decrypt(this.useKey, element.value)
             dencdObj.key = element.key
             dencdObj.value = ivalue.substring(0, ivalue.indexOf(this.addKey))
-            log('decrypted key', dencdObj.key, 'green')
-            log('decrypted subvalue', dencdObj.value, 'green')
             keyValArray.push(dencdObj)
-            console.dir(dencdObj)
+            // log('decrypted key', dencdObj.key, 'green')
+            // log('decrypted subvalue', dencdObj.value, 'green')
+            // console.dir(dencdObj)
         });
-        log('keyValArray', keyValArray, 'cyan')
-        console.dir(keyValArray)
-        log('decryptedArr before dis[;ay', keyValArray, 'beige')
+        // log('keyValArray', keyValArray, 'cyan')
+        // console.dir(keyValArray)
+        // log('decryptedArr before dis[;ay', keyValArray, 'beige')
         displayResults(keyValArray)
         return keyValArray
     }

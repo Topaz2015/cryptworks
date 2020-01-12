@@ -20,7 +20,7 @@
         <div class="container txtout">
             <div class="row">
                 <div class="col-sm-8  tabla">      
-                    <input type="checkbox" data-toggle="toggle" id="cryp" 
+                    <input type="checkbox" data-toggle="toggle" id="cbToggle" 
                             data-off="Encrypt" data-on="Decrypt" 
                             data-onstyle="success" data-offstyle="info" data-width="100%">                  
                     <!-- Modal -->
@@ -28,11 +28,12 @@
                     <div w3-include-html="modals/decrypt.html"></div>
                     <script>includeHeader();</script>  
                 </div>
-                <div class="col-sm-4 tabla" id='rightside' style="display: none;">                        
+                <!-- <div class="col-sm-4 tabla" id='rightside' style="display: none;">                        -->
+                <div class="col-sm-4 tabla" id='rightside'>                        
                     <div class="container txtout" style="background-color: darkslategray;">
                             <div class="row">
                                 <div class="col-sm-12 tabla">
-                                    <div class="table-responsive table-bordered table-hover table-condensed table-striped">
+                                    <div id='table_parent' class="table-responsive table-bordered table-hover table-condensed table-striped">
                                         <table class="table" id='restable' style=" color: aliceblue;">
                                             <p class="text-center">Output</p>
                                             <th>Name</th><th>Value</th>
@@ -41,35 +42,43 @@
                                 </div>
                             </div>
                         </div>
+                        <textarea name="outs" id="output"></textarea>
+                        <button type="button" id="calculate"; style="background-color: darkslategray;">Calculate</button>
+                        
                     </div>
                 </div>
         </div>
 
         <script>
             var toggle = 0;
-            $(document).ready(function() {
-                //encrypting modal
-                $('#cryp').change(function() {
-                    var enc = document.getElementById("encModal")      //$("#encModal")
-                    var dec = document.getElementById("decModal")      
+            $(document).ready(function() { 
+                let pazky = 'The Lord is my shepherd'
+                let pazln = 9
+                //encrypting modal //JGTMP = 10+19+13+13+16 = 66
+                $('#cbToggle').change(function() {
                     toggle ^= 1;
+                    var enc = document.getElementById("encModal")      //$("#encModal")
+                    var dec = document.getElementById("decModal") 
+                    
                     if (enc.style.display === "none") {         //encryption
                         dec.style.display = "none";
                         enc.style.display = "block";
+                        
                         $("#ewebsite").val("google.com");
                         $("#password").val("password");
                         $("#username").val("username");
                         $("#email").val("muigaipaz@gmail.com");
-                        $("#comment").val("Please enter description here...");
-                        $("#elen").val("9");
-                        $("#ekey").val("key");
+                        // $("#comment").val("Please enter description here...");
+                        $("#elen").val(pazln);
+                        $("#ekey").val(pazky);
                         $("#ecrypt").click(initEncryptor);   
-                    } else {                                    //decryption
+                    } 
+                    else {                                    //decryption
                         enc.style.display = "none";
                         dec.style.display = "block";
                         // $("#encstr").text('U2FsdGVkX1+k+4w5bc6KDRrd05uw7CmX0bigKP846HDwKgpTg7Hmyii1t5JEIGHatf98k3vtTkeV0m+lkFNwyA0a9m5sqk5vqNv/xcqbnb2jjafRYLi6uR3NgA0N6p1MrAxIRPejCHa3Ez4RzBWU2c6xNnCs1q2dNZYwGA4rzDa+Ox+1EVC6uQhGDEMkKmuWegkOECBU3creyEtaBY1PBh/1lBad4I2YHldSmNWGtwGAI1DHG1+SMWrSEiQem6VP+MJ3zMMknibzZelbW3QO0/KTgaY6f3iTNU4xO93JvsS0/0ybwhZZfopPOwV+QctjIOoA1moObKbMNiXEJqHskHY2nOcAgZoI5j3Q4urWh3DYewlARsP9gLlFXjQ8hE/XqBJVm1jGS+TR4Xu4KivP0KG+Y677EWe+3JkX1RqpdXt+n7+HTTOmJbe1lFXVlq1nSukhzxwYe/2eK1C+HsNkjRTVsDmoFcAHmAIfQ4l3E84U7+i1sb93mbUdRuaXVPb2i7W9GNLFriIPyeSVhcftmwqcQEu1g2NAuXOkOpDRuQFwnryO2APkCVQvOG/H4mm1AgnKqz5xjJWFS2wp+nHQ/IpbLFYQQO6C4F6PLymOjg2vHs9qKD1Q8VYRG95yfHt88D9WFvnKsRcREF27sHgw6tOwjXdT09cGmyrtFul/6yLTvmpIUgkFTnoz27EE7HGG1EJzYn2XSaLKXPmnelN78sMDs0FvG6LeKQqJellefLbUbJzbTm7fHA5HPGIHYxQs3UECz35hCgZ30sOfzoLCGuDnBvNLIf3Wo9hx1giOSfs=');          //.attr('readonly', 'readonly');
-                        $("#dkey").val('key');          //.attr('readonly', 'readonly');
-                        $("#dlen").val('9');          //.attr('readonly', 'readonly');
+                        $("#dkey").val(pazky);          //.attr('readonly', 'readonly');
+                        $("#dlen").val(pazln);          //.attr('readonly', 'readonly');
                         
                         $('#file').change(function(){
                             var decfile = $("#file").val();
@@ -98,25 +107,34 @@
                         }
                             logc('decryptedArr', decryptedArr, 'cyan');                            
                             // logc('$(decfile)', decfile, 'magenta');
-                        });
-                })
+                        });                        
+                    var cmnt = document.getElementById("comment")  
                 
+                })
+
                 displayResults = (resArray) => {
+                    var tab = document.getElementById('restable')
+                    var rlen = tab.rows.length
+                    logc('table rows', rlen, "orange");
+                    for (let index = rlen-1; index > 0; index--) {       
+                        logc('removing row', index, "white");
+                        tab.deleteRow(index)                 
+                    }
+                    logc('table rows', tab.rows.length, "green");
+                    // createNewTable()
                     resArray.forEach(element => {
-                        logc('Laying table', element, "pink");
-                        // var tab = ${'restable'}
-                        var tab = document.getElementById('restable')
                         var row = document.createElement('tr')
                         var dt1 = document.createElement('td')
                         var dt2 = document.createElement('td')
-                        logc('valwu ', element.value, "pink");
+                        // logc('valwu ', element.value, "pink");
                         dt1.innerHTML = element.key
                         dt2.innerHTML = element.value
                         row.appendChild(dt1)
                         row.appendChild(dt2)
                         tab.appendChild(row)
                     });
-                        document.getElementById('rightside').style = 'display: block;';
+                    document.getElementById('rightside').style = 'display: block;';
+                    logc('table rows', tab.rows.length, "orange");
                 }
                 createInObj = (key, val) => {
                     var obj     = {};
@@ -128,6 +146,7 @@
                 initEncryptor = () => {
                     var input = [];
                     var encryptedObj = {};
+                    logc('Encrypting', '', 'orange')
                     input.push(createInObj('website', $("#ewebsite").val()));
                     input.push(createInObj('password', $("#password").val()));
                     input.push(createInObj('username', $("#username").val()));
@@ -138,32 +157,30 @@
                     if (key.length > 0 && len !== NaN){
                         let obj = new CryptLibyPaz(key, len);
                         encryptedObj = obj.encryptThis(input);
+
                         // $("#btn-save").click( function() {
-                        var text = encryptedObj;
-                        var filename = 'encryptedText'
-                        var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+                        // var text = encryptedObj;
+                        $('#output').val(encryptedObj)
+                        // var filename = 'encryptedText'
+                        // var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
                         // saveAs(blob, filename+".txt");
                         // });
                     }
+                    var site = $("#ewebsite").val()
+                    site = site.slice(0, site.indexOf("."))
+                    var name = $("#email").val()
+                    name = name.slice(0, name.indexOf('@'))
                     console.log("adding you to github")
                     console.log(('%c(encryptedObj : ' + encryptedObj), 'color:#d5f');
                     console.dir(encryptedObj);
                         var link = document.createElement('a');
-                        link.download = 'data.json';
+                        link.download = site + '.' +((name !== undefined)? name : '') +  '.json';
                         var blob = new Blob([encryptedObj], {type: 'text/plain'});
                         link.href = window.URL.createObjectURL(blob);
                         link.click();
                     console.log('check this out!!')
                 }
-                //decryption test
-                $("#btDec").click(function() {
-                    // $("#myModal").modal("show");
-                    $("#crypt").text("Decrypt Data");
-                    $("#title").text("Decrypted info");
-                    $("textarea, input:text");          //.attr('readonly', 'readonly');
-                    $("#crypt").click(initDecryptor);
-                });
-                //decryption test 
+                
             });
                 
             loge = function(name, value) {
@@ -183,6 +200,58 @@
                 var dat = title + ': ' + value;
                 console.log(('%c' + dat), col);
             }
+
+
+
+            $( "#calculate" ).click(function() {
+                    console.log( "Handler for .keypress() called." );
+                    const ky = $("#comment").val().toUpperCase() ;
+                    // var out = $("#output").val();
+                    let sum = 0, outText = "Sum= "
+                    for (let i=0; i<ky.length; i++){
+                        var y, fchar='', kc = ky.charCodeAt(i);
+                        logc('ky', kc, 'orange')    
+                        // logc('ky', x, 'green')
+                        if (kc>64 && kc<91){
+                            fchar += ky[i]
+                            // logc('fchar', fchar, 'orange')
+                            sum += kc - 64
+                        }                        
+                    }
+                    let v = sum/49
+                    outText += v
+                    $("#output").val(outText)
+                });    
+                
+
         </script>
     </body>
 </html>
+
+
+
+    
+     <!-- <table class="table" id='restable' style=" color: aliceblue;">
+        //                             <p class="text-center">Output</p>
+        //                             <th>Name</th><th>Value</th>
+        //                         </table> -->
+    <!-- createNewTable = () => {
+        var table_parent = document.getElementById('table_parent')
+        var oldtable = document.getElementById('restable')
+        // table_parent.removeChild(oldtable)
+        var newtable = document.createElement('table')
+        newtable.setAttribute('id', 'restable')
+        newtable.setAttribute('class', 'table')
+        newtable.style = 'color: aliceblue;'
+        var p = document.createElement('p')
+        p.setAttribute('class', 'text-center')
+        p.innerHTML = 'Output'
+        var th1 = document.createElement('th')
+        th1.innerHTML = 'Name'
+        var th2 = document.createElement('th')
+        th2.innerHTML = 'Value'
+        newtable.appendChild(p)
+        newtable.appendChild(th1)
+        newtable.appendChild(th2)
+        table_parent.appendChild(newtable)
+    } -->
